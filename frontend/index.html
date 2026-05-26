@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Powered Dashcam</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Boxicons for standard icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <button class="menu-btn" id="menuBtn">
+                    <i class='bx bx-menu'></i>
+                </button>
+            </div>
+
+            <div class="sidebar-lang">
+                <span class="lang-label" data-i18n="language">LANGUAGE</span>
+                <div class="lang-select-wrapper">
+                    <select class="lang-select" id="customLangSelect">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="hi">हिन्दी (Hindi)</option>
+                        <option value="bn">বাংলা (Bengali)</option>
+                        <option value="te">తెలుగు (Telugu)</option>
+                        <option value="mr">मराठी (Marathi)</option>
+                        <option value="ta">தமிழ் (Tamil)</option>
+                        <option value="ur">اُردُو (Urdu)</option>
+                        <option value="gu">ગુજરાતી (Gujarati)</option>
+                        <option value="kn">ಕನ್ನಡ (Kannada)</option>
+                        <option value="ml">മലയാളം (Malayalam)</option>
+                        <option value="or">ଓଡ଼ିଆ (Odia)</option>
+                        <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+                        <option value="as">অসমীয়া (Assamese)</option>
+                        <option value="mai">मैथिली (Maithili)</option>
+                        <option value="sat">ᱥᱟᱱᱛᱟᱲᱤ (Santali)</option>
+                        <option value="ks">कॉशुर (Kashmiri)</option>
+                        <option value="ne">नेपाली (Nepali)</option>
+                        <option value="kok">कोंकणी (Konkani)</option>
+                        <option value="sd">سنڌي (Sindhi)</option>
+                        <option value="doi">डोगरी (Dogri)</option>
+                        <option value="mni">ꯃꯤꯇꯩꯂꯣꯟ (Manipuri)</option>
+                        <option value="brx">बड़ो (Bodo)</option>
+                        <option value="sa">संस्कृत (Sanskrit)</option>
+                    </select>
+                </div>
+                <div id="google_translate_element" style="display: none;"></div>
+                <div class="powered-by">Powered by <span class="g-translate">Google Translate</span></div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="background-grid"></div>
+
+            <header class="dashboard-header">
+                <h1 class="logo-text"><span class="logo-x">AI</span> <span class="logo-gradient">POWERED
+                        DASHCAM</span></h1>
+                <p class="subtitle" data-i18n="subtitle">ADVANCED DRIVER ASSISTANCE SYSTEMS</p>
+            </header>
+
+            <div class="button-grid-container">
+                <!-- Row 1 -->
+                <div class="grid-row row-3">
+                    <button class="action-card" id="liveOptionBtn">
+                        <div class="card-icon glow-red">
+                            <i class='bx bxs-circle'></i>
+                        </div>
+                        <span class="card-label" data-i18n="live">LIVE OPTION</span>
+                    </button>
+
+                    <button class="action-card" id="preRecordBtn">
+                        <div class="card-icon">
+                            <i class='bx bx-video-recording'></i>
+                        </div>
+                        <span class="card-label" data-i18n="record">PRE RECORD OPTION</span>
+                    </button>
+
+                    <button class="action-card" id="accidentBtn">
+                        <div class="card-icon glow-orange">
+                            <i class='bx bx-error-alt'></i>
+                        </div>
+                        <span class="card-label" data-i18n="accident">ACCIDENT CLIP</span>
+                    </button>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="grid-row row-2">
+                    <button class="action-card" id="alertBtn">
+                        <div class="card-icon glow-yellow">
+                            <i class='bx bxs-bell-ring'></i>
+                        </div>
+                        <span class="card-label" data-i18n="alert">ALERT NOTIFICATION</span>
+                    </button>
+
+                    <button class="action-card" id="demoBtn">
+                        <div class="card-icon glow-blue">
+                            <i class='bx bx-joystick'></i>
+                        </div>
+                        <span class="card-label" data-i18n="demo">DEMO OPTION</span>
+                    </button>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="grid-row row-1">
+                    <button class="action-card sos-card" id="sosBtn">
+                        <div class="card-icon glow-red-strong">
+                            <span class="sos-text">SOS</span>
+                        </div>
+                        <span class="card-label" data-i18n="sos">HOW SOS WORKS</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Live View Container -->
+            <div id="liveView" class="live-view hidden">
+                <button class="back-btn" id="backBtn">
+                    <i class='bx bx-arrow-back'></i> <span data-i18n="back_dashboard">Back to Dashboard</span>
+                </button>
+                <div class="live-content">
+                    <div class="video-section">
+                        <div class="view-container">
+                            <span class="view-label" data-i18n="driver_view">DRIVER VIEW</span>
+                            <video
+                                src="file:///C:/Users/Aiml/Documents/dashcam%20video/web%20videos/stock-footage-a-year-old-caucasian-father-and-his-year-old-son-drive-together-in-a-car-with-the-sun.mp4"
+                                autoplay loop muted class="dash-video"></video>
+                        </div>
+                        <div class="view-container">
+                            <span class="view-label" data-i18n="road_view">ROAD VIEW</span>
+                            <video
+                                src="file:///C:/Users/Aiml/Documents/dashcam%20video/web%20videos/stock-footage-tilton-nh-usa-january-tilton-new-hampshire-usa-k-driving-dashcam-footage.mp4"
+                                autoplay loop muted class="dash-video"></video>
+                        </div>
+                    </div>
+                    <div class="map-section">
+                        <span class="view-label map-label" data-i18n="location">LOCATION</span>
+                        <!-- Placeholder map centered somewhat generically for a driving context -->
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.98731968459391!3d40.75889497932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pre Record View Container -->
+            <div id="preRecordView" class="live-view hidden">
+                <button class="back-btn" id="preRecordBackBtn">
+                    <i class='bx bx-arrow-back'></i> <span data-i18n="back_dashboard">Back to Dashboard</span>
+                </button>
+                <div class="live-content" id="preRecordContent">
+                    <div class="video-list-container">
+                        <div class="video-list-header">
+                            <h2 class="video-list-title">Videos</h2>
+                        </div>
+                        <div id="videoListBody">
+                            <!-- Pre-recorded Item 1 -->
+                            <div class="video-list-item"
+                                data-src="file:///C:/Users/Aiml/Documents/dashcam%20video/web%20videos/stock-footage-tilton-nh-usa-january-tilton-new-hampshire-usa-k-driving-dashcam-footage.mp4"
+                                data-title="26/05/2026/Tuesday">
+                                <div class="video-thumbnail-wrapper">
+                                    <video
+                                        src="file:///C:/Users/Aiml/Documents/dashcam%20video/web%20videos/stock-footage-tilton-nh-usa-january-tilton-new-hampshire-usa-k-driving-dashcam-footage.mp4"
+                                        class="video-thumbnail-img" muted></video>
+                                    <div class="video-play-icon"><i class='bx bx-play'></i></div>
+                                    <div class="video-duration">1:15</div>
+                                </div>
+                                <div class="video-info">
+                                    <h3 class="video-item-title">26/05/2026/Tuesday</h3>
+                                    <div class="video-item-meta">
+                                        <span>Local File &middot; Dashcam</span>
+                                    </div>
+                                    <div class="video-item-meta">
+                                        <span>Pre-recorded</span>
+                                    </div>
+                                </div>
+                                <div class="video-menu-icon">
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </div>
+                            </div>
+
+                            <!-- Pre-recorded Item 2 -->
+                            <div class="video-list-item"
+                                data-src="file:///C:/Users/Aiml/Documents/dashcam%20video/web%20videos/stock-footage-saint-damase-quebec-canada-k-dashcam-footage-traveling-along-route-through.mp4"
+                                data-title="25/05/2026/Monday">
+                                <div class="video-thumbnail-wrapper">
+                                    <video
+                                        src="file:///C:/Users/Aiml/Documents/dashcam%20video/web%20videos/stock-footage-saint-damase-quebec-canada-k-dashcam-footage-traveling-along-route-through.mp4"
+                                        class="video-thumbnail-img" muted></video>
+                                    <div class="video-play-icon"><i class='bx bx-play'></i></div>
+                                    <div class="video-duration">2:30</div>
+                                </div>
+                                <div class="video-info">
+                                    <h3 class="video-item-title">25/05/2026/Monday</h3>
+                                    <div class="video-item-meta">
+                                        <span>Local File &middot; Dashcam</span>
+                                    </div>
+                                    <div class="video-item-meta">
+                                        <span>Pre-recorded</span>
+                                    </div>
+                                </div>
+                                <div class="video-menu-icon">
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </div>
+                            </div>
+
+                            <!-- Pre-recorded Item 3 -->
+                            <div class="video-list-item"
+                                data-src="file:///C:/Users/Aiml/Documents/dashcam%20video/web%20videos/stock-footage-bandipur-india-february-dashcam-journey-along-tree-lined-forest-highway.mp4"
+                                data-title="24/05/2026/Sunday">
+                                <div class="video-thumbnail-wrapper">
+                                    <video
+                                        src="file:///C:/Users/Aiml/Documents/dashcam%20video/web%20videos/stock-footage-bandipur-india-february-dashcam-journey-along-tree-lined-forest-highway.mp4"
+                                        class="video-thumbnail-img" muted></video>
+                                    <div class="video-play-icon"><i class='bx bx-play'></i></div>
+                                    <div class="video-duration">1:45</div>
+                                </div>
+                                <div class="video-info">
+                                    <h3 class="video-item-title">24/05/2026/Sunday</h3>
+                                    <div class="video-item-meta">
+                                        <span>Local File &middot; Dashcam</span>
+                                    </div>
+                                    <div class="video-item-meta">
+                                        <span>Pre-recorded</span>
+                                    </div>
+                                </div>
+                                <div class="video-menu-icon">
+                                    <i class='bx bx-dots-vertical-rounded'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-content hidden" id="playerContent">
+                    <div
+                        style="display: flex; flex-direction: column; width: 100%; max-width: 1000px; margin: 0 auto; align-items: center;">
+                        <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 20px;">
+                            <button class="back-btn" id="backToListBtn" style="margin-bottom: 0;">
+                                <i class='bx bx-arrow-back'></i> <span data-i18n="back_videos">Back to Videos</span>
+                            </button>
+                            <button class="upload-small-btn" id="saveFromPlayerBtn">
+                                <i class='bx bx-save'></i> <span data-i18n="save_accident_player">Save as Accident
+                                    Clip</span>
+                            </button>
+                        </div>
+                        <div class="view-container" style="width: 100%; aspect-ratio: 16/9; margin-top: 10px;">
+                            <span class="view-label" id="uploadedVideoName" data-i18n="video_player">VIDEO PLAYER</span>
+                            <video id="uploadedVideoPlayer" autoplay loop muted class="dash-video"></video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accident View Container -->
+            <div id="accidentView" class="live-view hidden">
+                <button class="back-btn" id="accidentBackBtn">
+                    <i class='bx bx-arrow-back'></i> <span data-i18n="back_dashboard">Back to Dashboard</span>
+                </button>
+                <div class="live-content">
+                    <div class="video-list-container">
+                        <div class="video-list-header">
+                            <h2 class="video-list-title">Accident Clips</h2>
+                        </div>
+                        <div id="accidentListBody">
+                            <div
+                                style="color: #64748b; font-family: 'Inter', sans-serif; text-align: center; padding: 20px;">
+                                No accident clips available.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Alert Notification View Container -->
+            <div id="alertView" class="live-view hidden">
+                <button class="back-btn" id="alertBackBtn">
+                    <i class='bx bx-arrow-back'></i> <span data-i18n="back_dashboard">Back to Dashboard</span>
+                </button>
+                <div class="live-content">
+                    <div class="video-list-container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+                        <div class="video-list-header">
+                            <h2 class="video-list-title" style="color: #ff4757;"><i class='bx bxs-bell-ring'></i> Alert
+                                Notifications</h2>
+                            <div class="profile-selector">
+                                <label
+                                    style="color: var(--text-secondary); font-size: 12px; margin-right: 8px;">Profile:</label>
+                                <select id="alertProfileSelect" class="profile-dropdown">
+                                    <option value="dad">Dad</option>
+                                    <option value="mom">Mom</option>
+                                    <option value="son">Son</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="alert-list"
+                            style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+                            <div class="alert-item"
+                                style="background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3); padding: 15px; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px;">
+                                <i class='bx bx-error' style="color: #ff4757; font-size: 20px;"></i> <strong>Driver
+                                    distraction</strong>
+                                <label class="toggle-switch"><input type="checkbox" checked><span
+                                        class="slider"></span></label>
+                            </div>
+                            <div class="alert-item"
+                                style="background: rgba(255, 165, 2, 0.1); border: 1px solid rgba(255, 165, 2, 0.3); padding: 15px; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px;">
+                                <i class='bx bx-sleepy' style="color: #ffa502; font-size: 20px;"></i>
+                                <strong>Drowsiness</strong>
+                                <label class="toggle-switch"><input type="checkbox" checked><span
+                                        class="slider"></span></label>
+                            </div>
+                            <div class="alert-item"
+                                style="background: rgba(0, 255, 255, 0.1); border: 1px solid rgba(0, 255, 255, 0.3); padding: 15px; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px;">
+                                <i class='bx bx-user-x' style="color: #00ffff; font-size: 20px;"></i> <strong>Seatbelt
+                                    absence</strong>
+                                <label class="toggle-switch"><input type="checkbox" checked><span
+                                        class="slider"></span></label>
+                            </div>
+                            <div class="alert-item"
+                                style="background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3); padding: 15px; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px;">
+                                <i class='bx bx-glasses-alt' style="color: #ff4757; font-size: 20px;"></i>
+                                <strong>Unsafe attention behavior</strong>
+                                <label class="toggle-switch"><input type="checkbox" checked><span
+                                        class="slider"></span></label>
+                            </div>
+                            <div class="alert-item"
+                                style="background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3); padding: 15px; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px;">
+                                <i class='bx bx-car' style="color: #ff4757; font-size: 20px;"></i>
+                                <strong>Collision-risk situations</strong>
+                                <label class="toggle-switch"><input type="checkbox" checked><span
+                                        class="slider"></span></label>
+                            </div>
+                            <div class="alert-item"
+                                style="background: rgba(255, 165, 2, 0.1); border: 1px solid rgba(255, 165, 2, 0.3); padding: 15px; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px;">
+                                <i class='bx bx-traffic-cone' style="color: #ffa502; font-size: 20px;"></i> <strong>Road
+                                    hazards</strong>
+                                <label class="toggle-switch"><input type="checkbox" checked><span
+                                        class="slider"></span></label>
+                            </div>
+                            <div class="alert-item"
+                                style="background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3); padding: 15px; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px;">
+                                <i class='bx bx-cloud-rain' style="color: #ff4757; font-size: 20px;"></i> <strong>Unsafe
+                                    driving conditions</strong>
+                                <label class="toggle-switch"><input type="checkbox" checked><span
+                                        class="slider"></span></label>
+                            </div>
+                            <div class="alert-item"
+                                style="background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3); padding: 15px; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 10px;">
+                                <i class='bx bx-plus-medical' style="color: #ff4757; font-size: 20px;"></i>
+                                <strong>Emergency situations</strong>
+                                <label class="toggle-switch"><input type="checkbox" checked><span
+                                        class="slider"></span></label>
+                            </div>
+                        </div>
+                        <div style="margin-top: 30px; display: flex; justify-content: flex-end;">
+                            <button id="saveAlertsBtn"
+                                style="background: var(--accent-cyan); color: #000; border: none; padding: 12px 30px; border-radius: 8px; font-family: var(--font-heading); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); display: flex; align-items: center; gap: 8px;">
+                                <i class='bx bx-save'></i> <span data-i18n="save_settings">SAVE SETTINGS</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Demo View Container -->
+            <div id="demoView" class="live-view hidden">
+                <button class="back-btn" id="demoBackBtn">
+                    <i class='bx bx-arrow-back'></i> <span data-i18n="back_dashboard">Back to Dashboard</span>
+                </button>
+                <div class="live-content"
+                    style="justify-content: center; align-items: center; display: flex; flex-direction: column;">
+                    <div
+                        style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1200px; width: 100%; padding: 40px;">
+                        <div id="demoRoadViewBtn" class="demo-btn"
+                            style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; aspect-ratio: 16/9; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 32px; color: var(--accent-cyan); font-weight: 700; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); cursor: pointer;">
+                            <i class='bx bx-car' style="font-size: 72px; margin-bottom: 15px;"></i>
+                            <span>Road View</span>
+                        </div>
+                        <div id="demoDriverViewBtn" class="demo-btn"
+                            style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; aspect-ratio: 16/9; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 32px; color: var(--accent-cyan); font-weight: 700; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); cursor: pointer;">
+                            <i class='bx bx-user' style="font-size: 72px; margin-bottom: 15px;"></i>
+                            <span>Driver View</span>
+                        </div>
+                        <div id="demoTrafficLightBtn" class="demo-btn"
+                            style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; aspect-ratio: 16/9; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 32px; color: var(--accent-cyan); font-weight: 700; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); cursor: pointer;">
+                            <i class='bx bx-traffic-cone' style="font-size: 72px; margin-bottom: 15px;"></i>
+                            <span>Traffic Light</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Player View -->
+            <div id="demoPlayerView" class="live-view hidden">
+                <button class="back-btn" id="demoPlayerBackBtn">
+                    <i class='bx bx-arrow-back'></i> <span>Back to Demo</span>
+                </button>
+                <div class="live-content">
+                    <div
+                        style="display: flex; flex-direction: column; width: 100%; max-width: 1000px; margin: 0 auto; align-items: center;">
+                        <div class="view-container" style="width: 100%; aspect-ratio: 16/9; margin-top: 10px;">
+                            <span class="view-label" id="demoPlayerTitle">CAR DETECTION</span>
+                            <video id="demoVideoPlayer" autoplay loop muted class="dash-video"></video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOS Info View Container -->
+            <div id="sosView" class="live-view hidden">
+                <button class="back-btn" id="sosBackBtn">
+                    <i class='bx bx-arrow-back'></i> <span data-i18n="back_dashboard">Back to Dashboard</span>
+                </button>
+                <div class="live-content sos-info-content">
+                    <div class="sos-info-card">
+                        <div class="sos-animated-header">
+                            <i class='bx bx-broadcast'></i>
+                            <h2 class="sos-title">AI Smart SOS Emergency Response System</h2>
+                        </div>
+                        <div class="sos-animated-body">
+                            <p class="fade-in-text">The AI Smart SOS Emergency Response System is an advanced safety
+                                feature integrated into our AI Smart Dashcam project to provide immediate assistance
+                                during accidents, driver unconsciousness, or dangerous road situations. The system
+                                continuously monitors the driver using AI, Computer Vision, OpenCV, and MediaPipe
+                                technologies by tracking eye movement, head position, driver attention, and vehicle
+                                behavior in real time.</p>
+                            <p class="fade-in-text">When the AI detects a severe collision, unconscious driver
+                                condition, prolonged inactivity, unsafe driving pattern, or manual SOS trigger, the
+                                emergency mode activates automatically. The system instantly generates voice alerts,
+                                switches to SOS mode, and collects critical emergency data including live GPS location,
+                                driver status, incident time, and vehicle information.</p>
+                            <p class="fade-in-text">After confirmation, emergency notifications containing the live
+                                location and accident details are automatically sent to family members, emergency
+                                contacts, ambulance services, police stations, or fleet management systems. This rapid
+                                alert mechanism helps reduce rescue response time and improves survival chances during
+                                emergencies.</p>
+                            <p class="fade-in-text">The SOS system is designed using AI-powered monitoring, real-time
+                                processing, GPS integration, alert automation, and embedded system technologies such as
+                                Raspberry Pi, making it affordable, scalable, and suitable for cars, trucks, taxis,
+                                buses, and smart transportation systems.</p>
+                            <p class="fade-in-text">By combining intelligent monitoring, automated emergency
+                                communication, and real-time tracking, the AI Smart SOS System transforms a normal
+                                dashcam into a life-saving smart safety assistant that enhances road safety and supports
+                                faster emergency response operations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Save to Accident Clip Modal -->
+    <div id="accidentModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 class="modal-title" data-i18n="modal_title">Save to Accident Clip</h3>
+            <div class="modal-video-preview">
+                <video id="modalVideoPlayer" src="" autoplay loop muted class="dash-video"></video>
+            </div>
+            <div class="modal-form" style="margin-bottom: 15px;">
+                <div class="form-group">
+                    <label data-i18n="start_time">Start Time (sec)</label>
+                    <input type="number" id="modalStartTime" value="0" min="0">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="end_time">End Time (sec)</label>
+                    <input type="number" id="modalEndTime" value="10" min="1">
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 25px; flex: none;">
+                <label data-i18n="desc_opt">Description (Optional)</label>
+                <input type="text" id="modalDescription" placeholder="Add a short description...">
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn cancel" id="modalCancelBtn" data-i18n="cancel">Cancel</button>
+                <button class="modal-btn save" id="modalSaveBtn" data-i18n="save_clip">Save Clip</button>
+            </div>
+        </div>
+    </div>    <!-- Prototype Image Modal -->
+    <div id="prototypeImageModal" class="modal-overlay hidden" style="z-index: 2000;">
+        <div class="prototype-modal-content" style="position: relative; max-width: 90vw; max-height: 90vh; display: flex; justify-content: center; align-items: center;">
+            <button id="closePrototypeBtn" style="position: absolute; top: -40px; right: 0; background: none; border: none; color: white; font-size: 30px; cursor: pointer; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='white'"><i class='bx bx-x'></i></button>
+            <img src="prototype_image.png" alt="Prototype Diagram" style="max-width: 100%; max-height: 90vh; border-radius: 10px; box-shadow: 0 0 30px rgba(0, 240, 255, 0.5); object-fit: contain;">
+        </div>
+    </div>
+
+    <div class="prototype-badge">PROTOTYPE</div>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
