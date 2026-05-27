@@ -60,6 +60,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttonGridContainer = document.querySelector('.button-grid-container');
     const dashboardHeader = document.querySelector('.dashboard-header');
 
+    const topPrototypeBadge = document.querySelector('.prototype-badge');
+    if (topPrototypeBadge && buttonGridContainer) {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    if (buttonGridContainer.classList.contains('hidden')) {
+                        topPrototypeBadge.classList.add('hidden');
+                    } else {
+                        topPrototypeBadge.classList.remove('hidden');
+                    }
+                }
+            });
+        });
+        observer.observe(buttonGridContainer, { attributes: true });
+    }
+
     // Manual Translation Logic
     const customLangSelect = document.getElementById('customLangSelect');
     if (customLangSelect) {
