@@ -123,6 +123,13 @@ document.addEventListener('DOMContentLoaded', () => {
             buttonGridContainer.classList.add('hidden');
             dashboardHeader.classList.add('hidden');
             liveView.classList.remove('hidden');
+            
+            // Ensure Live View videos play
+            const liveVideos = liveView.querySelectorAll('video');
+            liveVideos.forEach(video => {
+                video.currentTime = 0;
+                video.play().catch(e => console.error("Autoplay prevented:", e));
+            });
         });
     }
 
@@ -439,9 +446,10 @@ document.addEventListener('DOMContentLoaded', () => {
             item.className = 'video-list-item';
             item.style.alignItems = 'center';
             item.innerHTML = `
-                <div class="video-thumbnail-wrapper" style="width: 120px; height: 68px;">
-                    <video src="${clip.src}#t=${clip.start}" class="video-thumbnail-img"></video>
+                <div class="video-thumbnail-wrapper accident-thumbnail" style="width: 120px; height: 68px; cursor: pointer;">
+                    <video src="${clip.src}#t=${clip.start}" class="video-thumbnail-img" muted playsinline></video>
                     <div class="video-duration">${clip.start}s - ${clip.end}s</div>
+                    <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 24px; pointer-events: none;"><i class='bx bx-play-circle'></i></div>
                 </div>
                 <div class="video-info" style="flex: 1;">
                     <h3 class="video-item-title">${clip.title} (Accident)</h3>
@@ -461,6 +469,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 accidentClips.splice(index, 1);
                 localStorage.setItem('accidentClips', JSON.stringify(accidentClips));
                 renderAccidentClips();
+            });
+            
+            const thumbWrapper = item.querySelector('.accident-thumbnail');
+            const video = thumbWrapper.querySelector('video');
+            const playOverlay = thumbWrapper.querySelector('.play-overlay');
+            
+            thumbWrapper.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (video.paused) {
+                    video.play().catch(err => console.log("Play failed:", err));
+                    playOverlay.style.display = 'none';
+                } else {
+                    video.pause();
+                    playOverlay.style.display = 'block';
+                }
+            });
+            
+            // Stop at end time
+            video.addEventListener('timeupdate', () => {
+                if (video.currentTime >= clip.end) {
+                    video.pause();
+                    video.currentTime = clip.start;
+                    playOverlay.style.display = 'block';
+                }
             });
 
             accidentListBody.appendChild(item);
