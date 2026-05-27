@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
             demoPlayerView.classList.remove('hidden');
             const demoPlayerTitle = document.getElementById('demoPlayerTitle');
             if(demoPlayerTitle) demoPlayerTitle.textContent = "ROAD VIEW";
-            demoVideoPlayer.src = 'file:///C:/Users/Aiml/Videos/Captures/Real%20time%20dash%20cam%20object%20detection(720P_HD).mp4';
+            demoVideoPlayer.src = 'videos/Real%20time%20dash%20cam%20object%20detection(720P_HD).mp4';
             demoVideoPlayer.muted = true;
             demoVideoPlayer.volume = 0;
             demoVideoPlayer.play();
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
             demoPlayerView.classList.remove('hidden');
             const demoPlayerTitle = document.getElementById('demoPlayerTitle');
             if(demoPlayerTitle) demoPlayerTitle.textContent = "DRIVER VIEW";
-            demoVideoPlayer.src = 'file:///C:/Users/Aiml/Videos/Captures/RoscoVision%20DV6%20Dashcam_%20Drowsy%20Driver(480P).mp4';
+            demoVideoPlayer.src = 'videos/RoscoVision%20DV6%20Dashcam_%20Drowsy%20Driver(480P).mp4';
             demoVideoPlayer.muted = true;
             demoVideoPlayer.volume = 0;
             demoVideoPlayer.play();
@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
             demoPlayerView.classList.remove('hidden');
             const demoPlayerTitle = document.getElementById('demoPlayerTitle');
             if(demoPlayerTitle) demoPlayerTitle.textContent = "TRAFFIC LIGHT";
-            demoVideoPlayer.src = 'file:///C:/Users/Aiml/Videos/Captures/Traffic%20Light%20Detection%20using%20Opencv%20and%20YOLOv3%20(Tutorial%20in%20description)(720P_HD).mp4';
+            demoVideoPlayer.src = 'videos/Traffic%20Light%20Detection%20using%20Opencv%20and%20YOLOv3%20(Tutorial%20in%20description)(720P_HD).mp4';
             demoVideoPlayer.muted = true;
             demoVideoPlayer.volume = 0;
             demoVideoPlayer.play();
