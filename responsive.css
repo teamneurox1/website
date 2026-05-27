@@ -7,11 +7,19 @@
 
 /* TABLET & SMALLER DESKTOPS (Max Width: 1024px) */
 @media screen and (max-width: 1024px) {
+    body, html {
+        height: auto !important;
+        min-height: 100vh;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+
     .app-container {
         flex-direction: column;
-        height: auto;
+        height: auto !important;
         min-height: 100vh;
-        overflow-x: hidden;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
     }
 
     /* Convert Sidebar to Top Navigation */
